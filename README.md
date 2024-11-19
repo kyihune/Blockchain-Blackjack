@@ -10,9 +10,9 @@ Along with blockchain's immutability, bet settlement disputes would also cease t
 We want to create a version of Blackjack that ensures the players' trust is well placed and rewards those capable of excelling at the game.
 
 ### <ins>Group Members</ins>(name, github username, email):
-Sabeet Hossain, , 
-Anna Mark, ,
-Jonathan Tam, , 
-Derek Yeh, , 
-Kariam Yihune, kyihune,
-Caden Yin, , 
+Sabeet Hossain, , <br>
+Anna Mark, ,  <br>
+Jonathan Tam, , <br>
+Derek Yeh, , <br>
+Kariam Yihune, kyihune, <br>
+Caden Yin, , <br>
