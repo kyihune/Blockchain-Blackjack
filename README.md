@@ -15,4 +15,4 @@ Anna Mark<br>
 Jonathan Tam  Email: JONATHAN.TAM75@myhunter.cuny.edu <br>
 Derek Yeh Email: DEREK.YEH21@myhunter.cuny.edu <br>
 Kariam Yihune<br>
-Caden Yin<br>
+Caden Yin Email: caden.yin48@myhunter.cuny.edu<br>
