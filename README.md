@@ -13,6 +13,6 @@ We want to create a version of Blackjack that ensures the players' trust is well
 Sabeet Hossain<br>
 Anna Mark<br>
 Jonathan Tam<br>
-Derek Yeh<br>
+Derek Yeh Email: DEREK.YEH21@myhunter.cuny.edu <br>
 Kariam Yihune<br>
 Caden Yin<br>
