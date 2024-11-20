@@ -10,7 +10,6 @@ interface BlackjackInterface{
 
     // Card structure
     struct Card {
-        uint suit; // Suit of a given card
         uint value; // Representing 1-13 from Ace to King
     }
 
@@ -28,7 +27,7 @@ interface BlackjackInterface{
     function hit() external; // Lets the player draw one more card
     function stand() external; // Stops asking the player if they want to draw cards
     function getPlayerHand(address player) external view returns (Card[] memory); // Function to return 
-    function getDealerHand() external view returns (Card[] memory); // 
+    function getDealerHand() external view returns (Card[] memory); // Returns the dealer's hand
     function endHand() external view returns (address winner); // Finishes the hand and returns the winner
 
     // Event headers
@@ -39,7 +38,7 @@ interface BlackjackInterface{
     event playerBusted(address player, uint hand_sum); // To see that a player busted
     event playerHit(address player); // Shows that the player has hit
     event playerStood(address player); // Shows that the player has stood
-    event gameEnded(); // Showing the game has ended
+    event handEnded(); // Showing the hand has ended
 
 
 }
