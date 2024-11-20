@@ -11,7 +11,7 @@ We want to create a version of Blackjack that ensures the players' trust is well
 
 ### <ins>Group Members</ins>:
 Sabeet Hossain<br>
-Anna Mark<br>
+Anna Mark Email: anna.mark00@myhunter.cuny.edu
 Jonathan Tam  Email: JONATHAN.TAM75@myhunter.cuny.edu <br>
 Derek Yeh Email: DEREK.YEH21@myhunter.cuny.edu <br>
 Kariam Yihune<br>
