@@ -26,7 +26,7 @@ interface BlackjackInterface{
     function dealCard(address player) external; // Deals a single card to specified address
     function hit() external; // Lets the player draw one more card
     function stand() external; // Stops asking the player if they want to draw cards
-    function getPlayerHand(address player) external view returns (Card[] memory); // Function to return 
+    function getPlayerHand(address player) external view returns (Card[] memory); // Function to return the player's hand
     function getDealerHand() external view returns (Card[] memory); // Returns the dealer's hand
     function endHand() external view returns (address winner); // Finishes the hand and returns the winner
 
