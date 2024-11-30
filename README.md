@@ -10,9 +10,11 @@ Along with blockchain's immutability, bet settlement disputes would cease to exi
 We want to create a version of Blackjack that ensures the players' trust is well placed and rewards those capable of excelling at the game.
 
 ### <ins>Group Members</ins>:
-Sabeet Hossain Email: sabeet.hossain74@myhunter.cuny.edu<br>
-Anna Mark Email: anna.mark00@myhunter.cuny.edu <br>
-Jonathan Tam  Email: JONATHAN.TAM75@myhunter.cuny.edu <br>
-Derek Yeh Email: DEREK.YEH21@myhunter.cuny.edu <br>
-Kariam Yihune Email: kariam.yihune30@myhunter.cuny.edu<br>
-Caden Yin Email: caden.yin48@myhunter.cuny.edu<br>
+| Name           | Email
+|----------------|------------------------------------|
+| Sabeet Hossain | sabeet.hossain74@myhunter.cuny.edu |
+| Anna Mark      | anna.mark00@myhunter.cuny.edu      |
+| Jonathan Tam   | JONATHAN.TAM75@myhunter.cuny.edu   |
+| Derek Yeh      | DEREK.YEH21@myhunter.cuny.edu      |
+| Kariam Yihune  | kariam.yihune30@myhunter.cuny.edu  |
+| Caden Yin      | caden.yin48@myhunter.cuny.edu      |
