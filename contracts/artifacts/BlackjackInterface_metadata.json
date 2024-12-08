@@ -1,0 +1,124 @@
+{
+	"compiler": {
+		"version": "0.8.26+commit.8a97fa7a"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [],
+				"name": "handValueUpdated",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "handsum",
+						"type": "uint256"
+					},
+					{
+						"internalType": "string",
+						"name": "playerType",
+						"type": "string"
+					}
+				],
+				"name": "blackjackOrBust",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "calculateHandValue",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "dealerAction",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "decideWinner",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "endGame",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "action",
+						"type": "string"
+					}
+				],
+				"name": "playerAction",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "betAmount",
+						"type": "uint256"
+					}
+				],
+				"name": "startGame",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/blackjack_interface.sol": "BlackjackInterface"
+		},
+		"evmVersion": "cancun",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/blackjack_interface.sol": {
+			"keccak256": "0xf2cc3422530d85b2e08fbb0a5380215d79f9b587c9eab13d86271e1ec92a1da4",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://609c3a880d30c4c097b7cbaf4990409cb9dd935f96bc0fdc05bb9ec4bbdd9f5a",
+				"dweb:/ipfs/QmcJ6BZZ984DvAfGvFRYv9n5qXA3h5NKL3ByA6uSbkaUv5"
+			]
+		}
+	},
+	"version": 1
+}
