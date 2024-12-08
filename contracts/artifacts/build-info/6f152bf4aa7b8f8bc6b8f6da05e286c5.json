@@ -1,0 +1,543 @@
+{
+	"id": "6f152bf4aa7b8f8bc6b8f6da05e286c5",
+	"_format": "hh-sol-build-info-1",
+	"solcVersion": "0.8.26",
+	"solcLongVersion": "0.8.26+commit.8a97fa7a",
+	"input": {
+		"language": "Solidity",
+		"sources": {
+			"contracts/blackjack_interface.sol": {
+				"content": "// SPDX-License-Identifier: MIT\r\n\r\npragma solidity ^0.8.26;\r\n\r\ninterface BlackjackInterface {\r\n    /*\r\n    Insert comment here explaining code\r\n    */\r\n    function startGame(uint betAmount) external;\r\n\r\n    /*\r\n    If action inputed == hit deal one card and add that to the value of the player hand \r\n    If playerHand < 21 call dealerAction()\r\n    Else call BlackJackOrBust\r\n    If action == stand call dealerAction()\r\n    */\r\n    function playerAction(string memory action) external;\r\n\r\n    /*\r\n    If dealerHandSum >= 17 call decideWinner()\r\n    Else deal 1 card and add it to the value of dealerHand\r\n    */\r\n    function dealerAction() external;\r\n\r\n    /*\r\n    Checks player's hand FIRST to see if handValue == 21 || handValue > 21   \r\n    Checks dealer's hand SECOND to see if handValue == 21 || handValue > 21   \r\n    If playerHandValue == 21 you win\r\n    If dealerHandValue == 21 Dealer win\r\n    Call endgame()\r\n    */\r\n    function blackjackOrBust(uint handsum, string memory playerType) external;\r\n\r\n    /*\r\n    Compare dealerhandsum and playerhandsum. Whichever is higher wins. Set the winner variable = winner.\r\n    Edge case: both players hands are equal. In that case refund the bet amount. Set winner variable = tie.\r\n    Call endGame()\r\n    */\r\n    function decideWinner() external;\r\n\r\n    /*\r\n    Provide payout to winner. If the winner is player its 1.5*bet amount. \r\n    If its the dealer the contract get the bet amount from the player if that already hasnt been done in start game.\r\n    Also if its a tie refund the bet amount to the player if they already paid at start of game.\r\n    */\r\n    function endGame() external;\r\n\r\n    function calculateHandValue() external; // function to calculate hand value\r\n\r\n    event handValueUpdated(); // log value of hand \r\n\r\n}\r\n"
+			}
+		},
+		"settings": {
+			"optimizer": {
+				"enabled": false,
+				"runs": 200
+			},
+			"outputSelection": {
+				"*": {
+					"": [
+						"ast"
+					],
+					"*": [
+						"abi",
+						"metadata",
+						"devdoc",
+						"userdoc",
+						"storageLayout",
+						"evm.legacyAssembly",
+						"evm.bytecode",
+						"evm.deployedBytecode",
+						"evm.methodIdentifiers",
+						"evm.gasEstimates",
+						"evm.assembly"
+					]
+				}
+			},
+			"remappings": []
+		}
+	},
+	"output": {
+		"contracts": {
+			"contracts/blackjack_interface.sol": {
+				"BlackjackInterface": {
+					"abi": [
+						{
+							"anonymous": false,
+							"inputs": [],
+							"name": "handValueUpdated",
+							"type": "event"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "handsum",
+									"type": "uint256"
+								},
+								{
+									"internalType": "string",
+									"name": "playerType",
+									"type": "string"
+								}
+							],
+							"name": "blackjackOrBust",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "calculateHandValue",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "dealerAction",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "decideWinner",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [],
+							"name": "endGame",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "string",
+									"name": "action",
+									"type": "string"
+								}
+							],
+							"name": "playerAction",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						},
+						{
+							"inputs": [
+								{
+									"internalType": "uint256",
+									"name": "betAmount",
+									"type": "uint256"
+								}
+							],
+							"name": "startGame",
+							"outputs": [],
+							"stateMutability": "nonpayable",
+							"type": "function"
+						}
+					],
+					"devdoc": {
+						"kind": "dev",
+						"methods": {},
+						"version": 1
+					},
+					"evm": {
+						"assembly": "",
+						"bytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"deployedBytecode": {
+							"functionDebugData": {},
+							"generatedSources": [],
+							"immutableReferences": {},
+							"linkReferences": {},
+							"object": "",
+							"opcodes": "",
+							"sourceMap": ""
+						},
+						"gasEstimates": null,
+						"legacyAssembly": null,
+						"methodIdentifiers": {
+							"blackjackOrBust(uint256,string)": "08f4ebcb",
+							"calculateHandValue()": "fd794143",
+							"dealerAction()": "30d7bc38",
+							"decideWinner()": "25402e74",
+							"endGame()": "6cbc2ded",
+							"playerAction(string)": "d9cb46f0",
+							"startGame(uint256)": "e5ed1d59"
+						}
+					},
+					"metadata": "{\"compiler\":{\"version\":\"0.8.26+commit.8a97fa7a\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[],\"name\":\"handValueUpdated\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"handsum\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"playerType\",\"type\":\"string\"}],\"name\":\"blackjackOrBust\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"calculateHandValue\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"dealerAction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"decideWinner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"endGame\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"action\",\"type\":\"string\"}],\"name\":\"playerAction\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"betAmount\",\"type\":\"uint256\"}],\"name\":\"startGame\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/blackjack_interface.sol\":\"BlackjackInterface\"},\"evmVersion\":\"cancun\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/blackjack_interface.sol\":{\"keccak256\":\"0xf2cc3422530d85b2e08fbb0a5380215d79f9b587c9eab13d86271e1ec92a1da4\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://609c3a880d30c4c097b7cbaf4990409cb9dd935f96bc0fdc05bb9ec4bbdd9f5a\",\"dweb:/ipfs/QmcJ6BZZ984DvAfGvFRYv9n5qXA3h5NKL3ByA6uSbkaUv5\"]}},\"version\":1}",
+					"storageLayout": {
+						"storage": [],
+						"types": null
+					},
+					"userdoc": {
+						"kind": "user",
+						"methods": {},
+						"version": 1
+					}
+				}
+			}
+		},
+		"sources": {
+			"contracts/blackjack_interface.sol": {
+				"ast": {
+					"absolutePath": "contracts/blackjack_interface.sol",
+					"exportedSymbols": {
+						"BlackjackInterface": [
+							33
+						]
+					},
+					"id": 34,
+					"license": "MIT",
+					"nodeType": "SourceUnit",
+					"nodes": [
+						{
+							"id": 1,
+							"literals": [
+								"solidity",
+								"^",
+								"0.8",
+								".26"
+							],
+							"nodeType": "PragmaDirective",
+							"src": "35:24:0"
+						},
+						{
+							"abstract": false,
+							"baseContracts": [],
+							"canonicalName": "BlackjackInterface",
+							"contractDependencies": [],
+							"contractKind": "interface",
+							"fullyImplemented": false,
+							"id": 33,
+							"linearizedBaseContracts": [
+								33
+							],
+							"name": "BlackjackInterface",
+							"nameLocation": "73:18:0",
+							"nodeType": "ContractDefinition",
+							"nodes": [
+								{
+									"functionSelector": "e5ed1d59",
+									"id": 6,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "startGame",
+									"nameLocation": "165:9:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 4,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 3,
+												"mutability": "mutable",
+												"name": "betAmount",
+												"nameLocation": "180:9:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 6,
+												"src": "175:14:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 2,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "175:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "174:16:0"
+									},
+									"returnParameters": {
+										"id": 5,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "199:0:0"
+									},
+									"scope": 33,
+									"src": "156:44:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "d9cb46f0",
+									"id": 11,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "playerAction",
+									"nameLocation": "442:12:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 9,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 8,
+												"mutability": "mutable",
+												"name": "action",
+												"nameLocation": "469:6:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 11,
+												"src": "455:20:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 7,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "455:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "454:22:0"
+									},
+									"returnParameters": {
+										"id": 10,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "485:0:0"
+									},
+									"scope": 33,
+									"src": "433:53:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "30d7bc38",
+									"id": 14,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "dealerAction",
+									"nameLocation": "627:12:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 12,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "639:2:0"
+									},
+									"returnParameters": {
+										"id": 13,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "650:0:0"
+									},
+									"scope": 33,
+									"src": "618:33:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "08f4ebcb",
+									"id": 21,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "blackjackOrBust",
+									"nameLocation": "942:15:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 19,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 16,
+												"mutability": "mutable",
+												"name": "handsum",
+												"nameLocation": "963:7:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 21,
+												"src": "958:12:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												},
+												"typeName": {
+													"id": 15,
+													"name": "uint",
+													"nodeType": "ElementaryTypeName",
+													"src": "958:4:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_uint256",
+														"typeString": "uint256"
+													}
+												},
+												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 18,
+												"mutability": "mutable",
+												"name": "playerType",
+												"nameLocation": "986:10:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 21,
+												"src": "972:24:0",
+												"stateVariable": false,
+												"storageLocation": "memory",
+												"typeDescriptions": {
+													"typeIdentifier": "t_string_memory_ptr",
+													"typeString": "string"
+												},
+												"typeName": {
+													"id": 17,
+													"name": "string",
+													"nodeType": "ElementaryTypeName",
+													"src": "972:6:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_string_storage_ptr",
+														"typeString": "string"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "957:40:0"
+									},
+									"returnParameters": {
+										"id": 20,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1006:0:0"
+									},
+									"scope": 33,
+									"src": "933:74:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "25402e74",
+									"id": 24,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "decideWinner",
+									"nameLocation": "1275:12:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 22,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1287:2:0"
+									},
+									"returnParameters": {
+										"id": 23,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1298:0:0"
+									},
+									"scope": 33,
+									"src": "1266:33:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "6cbc2ded",
+									"id": 27,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "endGame",
+									"nameLocation": "1624:7:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 25,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1631:2:0"
+									},
+									"returnParameters": {
+										"id": 26,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1642:0:0"
+									},
+									"scope": 33,
+									"src": "1615:28:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"functionSelector": "fd794143",
+									"id": 30,
+									"implemented": false,
+									"kind": "function",
+									"modifiers": [],
+									"name": "calculateHandValue",
+									"nameLocation": "1660:18:0",
+									"nodeType": "FunctionDefinition",
+									"parameters": {
+										"id": 28,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1678:2:0"
+									},
+									"returnParameters": {
+										"id": 29,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1689:0:0"
+									},
+									"scope": 33,
+									"src": "1651:39:0",
+									"stateMutability": "nonpayable",
+									"virtual": false,
+									"visibility": "external"
+								},
+								{
+									"anonymous": false,
+									"eventSelector": "547c57d3ad5905405de82b8e681b8843daacca1468935c3c7963377aa4179469",
+									"id": 32,
+									"name": "handValueUpdated",
+									"nameLocation": "1740:16:0",
+									"nodeType": "EventDefinition",
+									"parameters": {
+										"id": 31,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "1756:2:0"
+									},
+									"src": "1734:25:0"
+								}
+							],
+							"scope": 34,
+							"src": "63:1723:0",
+							"usedErrors": [],
+							"usedEvents": [
+								32
+							]
+						}
+					],
+					"src": "35:1753:0"
+				},
+				"id": 0
+			}
+		}
+	}
+}
