@@ -89,6 +89,7 @@ contract Blackjack is BlackjackInterface {
             else {
                 blackjackOrBust(calculateHandValue(dealerHand),false);
             }
+        }
     }
 
 
