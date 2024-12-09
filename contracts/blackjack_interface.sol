@@ -52,6 +52,6 @@ interface BlackjackInterface {
 
     function calculateHandValue() external   view returns(uint); // function to calculate hand value
 
-    event handValueUpdated(); // log value of hand 
+    event handValueUpdated(address indexed player, uint handValue); // log value of hand 
 
 }
