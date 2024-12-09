@@ -37,7 +37,7 @@ contract Blackjack is BlackjackInterface {
     */
     function startGame(uint betAmount) external {
         // Ensure the player places a vaild bid
-        require(betAmount == 0, "Invalid Bet. Please bid over 0.");
+        require(betAmount > 0, "Invalid Bet. Please bid over 0.");
 
         // Ensure the player has enough balance to start the game
         require(playerBalances[msg.sender] >= betAmount * 2, "Insufficient balance to start the game. You need 2 times the amount you bet to play.");
@@ -49,7 +49,7 @@ contract Blackjack is BlackjackInterface {
         bet = betAmount;
         gameStarted = true;
 
-        // initalize a hand for the dealer and the player
+        // initalize a hand for the dealer and the player; might need to add a delete for the hands just in case?
         for(uint i = 0; i < 2; i++){
             playerHands[msg.sender].hand.push(deal());
             dealerHand.hand.push(deal());
@@ -66,12 +66,16 @@ contract Blackjack is BlackjackInterface {
     */
     function playerAction(bool hit) external { 
         
-       if(hit) {
-        
-       }
-      
-       else {
-        //if the player stands and the dealer's hand is greater than 17 decide the winner
+        if(hit) { // if you hit you push and the value gets automatically updated
+            playerHands[msg.sender].hand.push(deal()); // not going to decide win
+            emit handValueUpdated(msg.sender, calculateHandValue(playerHands[msg.sender])); // log value of the players new hand value again
+        }
+
+        if (calculateHandValue(playerHands[msg.sender].hand) >= 21) { // then you check either if you hit or if you stood if the value is >= 21 to go into the blackjackOrBust function
+                blackjackOrBust(calculateHandValue(playerHands[msg.sender].hand), true);
+        }
+
+        //if the player stands or hits and the dealer's hand is greater than 17 decide the winner
         if(calculateHandValue(dealerHand) >= 17) { 
             decideWinner();
         }
@@ -85,16 +89,6 @@ contract Blackjack is BlackjackInterface {
             else {
                 blackjackOrBust(calculateHandValue(dealerHand),false);
             }
-        }
-       }
-
-        // if (action == "hit") { 
-            // insert a new number into the array from a random number generator 1-10
-            // blackjackOrBust();
-        // }
-        // else if (action == "stand") {
-        //     // dealerAction();
-        // } 
     }
 
 
