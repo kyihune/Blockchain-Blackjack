@@ -4,7 +4,21 @@ pragma solidity ^0.8.26;
 
 import "contracts/blackjack_interface.sol";
 
-contract Blackjack is BlackjackInterface {
+
+contract Blackjack is BlackjackInterface { 
+    uint256 someNumber = 7
+    bool gameStarted = false;
+    bool isHit;
+    bool isPlayer;
+    uint bet = 0;
+
+    //internal because we only want the contract to be able to call this
+    function deal() internal  returns (uint){
+        uint randomNumber = uint256(keccak256(abi.encodePacked(msg.sender, block.difficulty,  someNumber, address(this))));
+        uint card = (randomNumber%10)+1;
+        someNumber += 1;
+        return card;
+    }
 
     //Mapping to store player balances
     mapping(address => uint) public playerBalances;
