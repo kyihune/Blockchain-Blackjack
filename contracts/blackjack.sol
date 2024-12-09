@@ -64,7 +64,30 @@ contract Blackjack is BlackjackInterface {
     Else call blackJackOrBust
     If action == stand call dealerAction()
     */
-    function playerAction(string memory action) external { // apparently the only want to compare memory strings to a regular string is through keccack256
+    function playerAction(bool hit) external { 
+        
+       if(hit) {
+        
+       }
+      
+       else {
+        //if the player stands and the dealer's hand is greater than 17 decide the winner
+        if(calculateHandValue(dealerHand) >= 17) { 
+            decideWinner();
+        }
+        //if it isn't greater than 17 give the dealer a card and calculate the value of the hand again
+        else {
+            dealerHand.hand.push(deal());
+            //If the dealer's hand's value is less than 21 call decideWinner() and if it is greater or equal call blackjackorBust()
+            if(calculateHandValue(dealerHand) < 21) {
+                decideWinner();
+            }
+            else {
+                blackjackOrBust(calculateHandValue(dealerHand),false);
+            }
+        }
+       }
+
         // if (action == "hit") { 
             // insert a new number into the array from a random number generator 1-10
             // blackjackOrBust();
@@ -74,13 +97,8 @@ contract Blackjack is BlackjackInterface {
         // } 
     }
 
-    /*
-    If dealerHandSum >= 17 call decideWinner()
-    Else deal 1 card and add it to the value of dealerHand
-    */
-    function dealerAction() external {
 
-    }
+    
 
     /*
     Checks player's hand FIRST to see if handValue == 21 || handValue > 21   
@@ -90,7 +108,7 @@ contract Blackjack is BlackjackInterface {
     Call endgame()
     */
     function blackjackOrBust(uint handSum, string memory playerType) external {
-
+        
     }
 
     /*
@@ -120,6 +138,7 @@ contract Blackjack is BlackjackInterface {
     Edge case: both players hands are equal. In that case refund the bet amount. 
     Call endGame()
     */
+
     function decideWinner() external {
         // Calculate the player's hand sum
         uint playerHandValue = 0;
@@ -150,7 +169,6 @@ contract Blackjack is BlackjackInterface {
         }
 
         endGame();
-
     }
 
     /*
@@ -162,8 +180,14 @@ contract Blackjack is BlackjackInterface {
 
     }
 
-    function calculateHandValue() external view returns(uint) { // function to calculate hand value; might need to make a random number generator 1-10 
-        // use a for loop and loop through the player hands
+    //Calculates the value of the hand of player or dealer
+    function calculateHandValue(uint[] memory hand) internal  view returns(uint) { // function to calculate hand value; might need to make a random number generator 1-10 
+        uint total = 0;
+        for(uint i = 0; i < hand.length; i++) {
+            total += hand[i];
+        }
+        return total;
     }
-
 }
+
+

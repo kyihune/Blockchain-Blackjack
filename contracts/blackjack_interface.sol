@@ -41,7 +41,7 @@ interface BlackjackInterface {
     Edge case: both players hands are equal. In that case refund the bet amount. Set winner variable = tie.
     Call endGame()
     */
-    function decideWinner() external;
+    function decideWinner() external  ;
 
     /*
     Provide payout to winner. If the winner is player its 1.5*bet amount. 
@@ -50,7 +50,7 @@ interface BlackjackInterface {
     */
     function endGame() external;
 
-    function calculateHandValue() external view returns(uint); // function to calculate hand value
+    function calculateHandValue() external   view returns(uint); // function to calculate hand value
 
     event handValueUpdated(); // log value of hand 
 
