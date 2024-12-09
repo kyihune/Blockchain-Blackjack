@@ -79,6 +79,25 @@
 			{
 				"inputs": [
 					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					}
+				],
+				"name": "playerBalances",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
 						"internalType": "uint256",
 						"name": "betAmount",
 						"type": "uint256"
@@ -118,11 +137,11 @@
 	},
 	"sources": {
 		"contracts/blackjack.sol": {
-			"keccak256": "0x47f6613582aa372d3d7e2054400d844eaf3a05e639eeb183823bbc92511ea808",
+			"keccak256": "0x3d262be88dcb0f8a0742f12e447d44e18905d6a448b388f2dde3a565675b4449",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bfa079701fe37b9abadb6c51ccf4cd2cb3a05b868f3bd94d69de4a975c1a55cc",
-				"dweb:/ipfs/QmVqoHU3nkFd6xekav4vuPFUCoPvmvmnEnZZ6nQjKGzcbA"
+				"bzz-raw://9c017643f1dfab099a103730d912cb2a2c8a588e50cd8053510cd7cb718df6ea",
+				"dweb:/ipfs/QmSHGWZt7oQiDGQy9pZjQtxdd3qehrFTH92sK447SYJuG7"
 			]
 		},
 		"contracts/blackjack_interface.sol": {

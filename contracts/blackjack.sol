@@ -4,13 +4,22 @@ pragma solidity ^0.8.26;
 
 import "contracts/blackjack_interface.sol";
 
-contract Blackjack is BlackjackInterface { 
+contract Blackjack is BlackjackInterface {
 
+    //Mapping to store player balances
+    mapping(address => uint) public playerBalances;
     /*
     Insert comment here explaining code (Use msg.sender as the address of the player)
     */
-    //commit test
     function startGame(uint betAmount) external {
+        // Ensure the player places a vaild bid
+        require(betAmount == 0, "Invalid Bet. Please bid over 0.");
+        // Ensure the player has enough balance to start the game
+        require(playerBalances[msg.sender] >= betAmount * 2, "Insufficient balance to start the game. You need 2 times the amount you bet to play.");
+
+        // Deduct the bet amount from the player's balance
+        playerBalances[msg.sender] -= betAmount;
+
         // initalize a hand for the dealer and the player (you can delete my comments for this function) 
         // include random number generator here that adds cards (you can delete my comments for this function) 
         emit handValueUpdated(); // log the value of the players new hand value
