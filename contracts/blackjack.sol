@@ -6,7 +6,7 @@ import "contracts/blackjack_interface.sol";
 
 
 contract Blackjack is BlackjackInterface { 
-    uint256 someNumber = 7
+    uint256 someNumber = 7;
     bool gameStarted = false;
     bool isHit;
     bool isPlayer;
@@ -22,20 +22,37 @@ contract Blackjack is BlackjackInterface {
 
     //Mapping to store player balances
     mapping(address => uint) public playerBalances;
+    // Mapping to store each player's hand
+    mapping(address => Hand) private playerHands;
+    // Dealer's hand
+    Hand private dealerHand;
+
     /*
-    Insert comment here explaining code (Use msg.sender as the address of the player)
+    Check if requirements are met before playing
+    Take money out of playerBalance and store it into a variable and oficially starting the game
+    Add two cards into both the player's and dealer's hand with deal() function
+    Log the values
     */
     function startGame(uint betAmount) external {
         // Ensure the player places a vaild bid
         require(betAmount == 0, "Invalid Bet. Please bid over 0.");
+
         // Ensure the player has enough balance to start the game
         require(playerBalances[msg.sender] >= betAmount * 2, "Insufficient balance to start the game. You need 2 times the amount you bet to play.");
 
         // Deduct the bet amount from the player's balance
         playerBalances[msg.sender] -= betAmount;
 
-        // initalize a hand for the dealer and the player (you can delete my comments for this function) 
-        // include random number generator here that adds cards (you can delete my comments for this function) 
+        // Store bet amount and set gameStarted to True
+        bet = betAmount;
+        gameStarted = true;
+
+        // initalize a hand for the dealer and the player
+        for(uint i = 0; i < 2; i++){
+            playerHands[msg.sender].hand.push(deal());
+            dealerHand.hand.push(deal());
+        }
+
         emit handValueUpdated(); // log the value of the players new hand value
     }
 

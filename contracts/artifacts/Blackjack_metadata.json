@@ -137,11 +137,11 @@
 	},
 	"sources": {
 		"contracts/blackjack.sol": {
-			"keccak256": "0x3d262be88dcb0f8a0742f12e447d44e18905d6a448b388f2dde3a565675b4449",
+			"keccak256": "0xb1eeb494b775c346e20fdeb407d2d6fdb5d764f6b6b68a5b594fffec5a6f4a58",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://9c017643f1dfab099a103730d912cb2a2c8a588e50cd8053510cd7cb718df6ea",
-				"dweb:/ipfs/QmSHGWZt7oQiDGQy9pZjQtxdd3qehrFTH92sK447SYJuG7"
+				"bzz-raw://61d266953a93b48ecd795bd4bfcfc793b3a0e897ca6d05ae10880d4c9f1206e4",
+				"dweb:/ipfs/QmRb5covM6iyQVGJKwC1F8sf3dwiyG1jbfCTSyVxqrUjy5"
 			]
 		},
 		"contracts/blackjack_interface.sol": {
