@@ -9,6 +9,7 @@ contract Blackjack is BlackjackInterface {
     /*
     Insert comment here explaining code (Use msg.sender as the address of the player)
     */
+    //commit test
     function startGame(uint betAmount) external {
         // initalize a hand for the dealer and the player (you can delete my comments for this function) 
         // include random number generator here that adds cards (you can delete my comments for this function) 
