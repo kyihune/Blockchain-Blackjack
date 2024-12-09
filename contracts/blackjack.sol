@@ -114,12 +114,42 @@ contract Blackjack is BlackjackInterface {
     }
     */
 
+    
     /*
-    Compare dealerhandsum and playerhandsum. Whichever is higher wins. Set the winner variable = winner.
-    Edge case: both players hands are equal. In that case refund the bet amount. Set winner variable = tie.
+    Compare dealerhandsum and playerhandsum. Whichever is higher wins.
+    Edge case: both players hands are equal. In that case refund the bet amount. 
     Call endGame()
     */
     function decideWinner() external {
+        // Calculate the player's hand sum
+        uint playerHandValue = 0;
+        for (uint i = 0; i < playerHands[msg.sender].hand.length; i++) {
+            playerHandValue += playerHands[msg.sender].hand[i];
+        }
+
+        // Calculate the dealer's hand sum
+        uint dealerHandValue = 0;
+        for (uint i = 0; i < dealerHand.hand.length; i++) {
+            dealerHandValue += dealerHand.hand[i];
+        }
+
+        if (playerHandValue > 21) {
+            win_lose_or_tie = 1; // Player busts, dealer wins
+        } else if (dealerHandValue > 21) {
+            win_lose_or_tie = 0; // Dealer busts, player wins
+        } else if (playerHandValue == 21) {
+            win_lose_or_tie = 0; // Player wins with blackjack
+        } else if (dealerHandValue == 21) {
+            win_lose_or_tie = 1; // Dealer wins with blackjack
+        } else if (playerHandValue == dealerHandValue) {
+            win_lose_or_tie = 2; // Tie
+        } else if (playerHandValue > dealerHandValue) {
+            win_lose_or_tie = 0; // Player wins
+        } else {
+            win_lose_or_tie = 1; // Dealer wins
+        }
+
+        endGame();
 
     }
 
