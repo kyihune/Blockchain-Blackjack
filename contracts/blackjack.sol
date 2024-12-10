@@ -17,7 +17,7 @@ contract Blackjack is BlackjackInterface {
 
     //internal because we only want the contract to be able to call this
     function deal() internal  returns (uint){
-        uint randomNumber = uint256(keccak256(abi.encodePacked(msg.sender, block.difficulty,  someNumber, address(this))));
+        uint randomNumber = uint256(keccak256(abi.encodePacked(msg.sender, block.prevrandao,  someNumber, address(this))));
         uint card = (randomNumber%10)+1;
         someNumber += 1;
         return card;
@@ -55,8 +55,8 @@ contract Blackjack is BlackjackInterface {
             playerHands[msg.sender].hand.push(deal());
             dealerHand.hand.push(deal());
         }
-
-        emit handValueUpdated(); // log the value of the players new hand value
+        uint playerHandValue = calculateHandValue(playerHands[msg.sender].hand);
+        emit handValueUpdated(msg.sender,playerHandValue); // log the value of the players new hand value
     }
 
     /*
@@ -69,7 +69,7 @@ contract Blackjack is BlackjackInterface {
         
         if(hit) { // if you hit you push and the value gets automatically updated
             playerHands[msg.sender].hand.push(deal()); // not going to decide win
-            emit handValueUpdated(msg.sender, calculateHandValue(playerHands[msg.sender])); // log value of the players new hand value again
+            emit handValueUpdated(msg.sender, calculateHandValue(playerHands[msg.sender].hand)); // log value of the players new hand value again
         }
 
         if (calculateHandValue(playerHands[msg.sender].hand) >= 21) { // then you check either if you hit or if you stood if the value is >= 21 to go into the blackjackOrBust function
@@ -77,18 +77,18 @@ contract Blackjack is BlackjackInterface {
         }
 
         //if the player stands or hits and the dealer's hand is greater than 17 decide the winner
-        if(calculateHandValue(dealerHand) >= 17) { 
+        if(calculateHandValue(dealerHand.hand) >= 17) { 
             decideWinner();
         }
         //if it isn't greater than 17 give the dealer a card and calculate the value of the hand again
         else {
             dealerHand.hand.push(deal());
             //If the dealer's hand's value is less than 21 call decideWinner() and if it is greater or equal call blackjackorBust()
-            if(calculateHandValue(dealerHand) < 21) {
+            if(calculateHandValue(dealerHand.hand) < 21) {
                 decideWinner();
             }
             else {
-                blackjackOrBust(calculateHandValue(dealerHand),false);
+                blackjackOrBust(calculateHandValue(dealerHand.hand),false);
             }
         }
     }
@@ -134,19 +134,13 @@ contract Blackjack is BlackjackInterface {
     Call endGame()
     */
 
-    function decideWinner() external {
+    function decideWinner() internal {
         // Calculate the player's hand sum
-        uint playerHandValue = 0;
-        for (uint i = 0; i < playerHands[msg.sender].hand.length; i++) {
-            playerHandValue += playerHands[msg.sender].hand[i];
-        }
-
-        // Calculate the dealer's hand sum
-        uint dealerHandValue = 0;
-        for (uint i = 0; i < dealerHand.hand.length; i++) {
-            dealerHandValue += dealerHand.hand[i];
-        }
-
+        uint playerHandValue = calculateHandValue(playerHands[msg.sender].hand);
+      
+         // Calculate the dealer's hand sum
+        uint dealerHandValue = calculateHandValue(dealerHand.hand);
+      
         if (playerHandValue > 21) {
             win_lose_or_tie = 1; // Player busts, dealer wins
         } else if (dealerHandValue > 21) {
@@ -171,25 +165,26 @@ contract Blackjack is BlackjackInterface {
     If its the dealer the contract get the bet amount from the player if that already hasnt been done in start game.
     Also if its a tie refund the bet amount to the player if they already paid at start of game.
     */
-    function endGame() external {
+    function endGame() internal   {
 
         // 0 represents a win for the player
         if (win_lose_or_tie == 0 ){  
             
-            (bool sent, bytes memory data) = payable(msg.sender).call{value : 2*bet}(""); 
-            require(sent, "Transfer failed.") // If sent is false, reports that the transfer has failed        
+            (bool sent, ) = payable(msg.sender).call{value : 2*bet}(""); // Avoiding warnings
+            require(sent, "Transfer failed.");// If sent is false, reports that the transfer has failed        
         }
         // 2 represents a tie for the player
         else if ( win_lose_or_tie ==  2 ){
 
-            (bool sent, bytes memory data) = payable(msg.sender).call{value : bet}("");
-            require(sent, "Transfer failed.")
+            (bool sent, ) = payable(msg.sender).call{value : bet}("");
+            require(sent, "Transfer failed.");
         }    
 
     }
 
     //Calculates the value of the hand of player or dealer
-    function calculateHandValue(uint[] memory hand) internal  view returns(uint) { // function to calculate hand value; might need to make a random number generator 1-10 
+    
+    function calculateHandValue(uint[] memory hand)  internal pure    returns(uint) { // function to calculate hand value; might need to make a random number generator 1-10 
         uint total = 0;
         for(uint i = 0; i < hand.length; i++) {
             total += hand[i];
