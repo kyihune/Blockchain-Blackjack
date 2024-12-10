@@ -135,17 +135,11 @@ contract Blackjack is BlackjackInterface {
 
     function decideWinner() external {
         // Calculate the player's hand sum
-        uint playerHandValue = 0;
-        for (uint i = 0; i < playerHands[msg.sender].hand.length; i++) {
-            playerHandValue += playerHands[msg.sender].hand[i];
-        }
-
-        // Calculate the dealer's hand sum
-        uint dealerHandValue = 0;
-        for (uint i = 0; i < dealerHand.hand.length; i++) {
-            dealerHandValue += dealerHand.hand[i];
-        }
-
+        uint playerHandValue = calculateHandValue(playerHands[msg.sender].hand);
+      
+         // Calculate the dealer's hand sum
+        uint dealerHandValue = calculateHandValue(dealerHand);
+      
         if (playerHandValue > 21) {
             win_lose_or_tie = 1; // Player busts, dealer wins
         } else if (dealerHandValue > 21) {
@@ -176,13 +170,13 @@ contract Blackjack is BlackjackInterface {
         if (win_lose_or_tie == 0 ){  
             
             (bool sent, bytes memory data) = payable(msg.sender).call{value : 2*bet}(""); 
-            require(sent, "Transfer failed.") // If sent is false, reports that the transfer has failed        
+            require(sent, "Transfer failed.");// If sent is false, reports that the transfer has failed        
         }
         // 2 represents a tie for the player
         else if ( win_lose_or_tie ==  2 ){
 
             (bool sent, bytes memory data) = payable(msg.sender).call{value : bet}("");
-            require(sent, "Transfer failed.")
+            require(sent, "Transfer failed.");
         }    
 
     }
