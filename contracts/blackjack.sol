@@ -169,13 +169,13 @@ contract Blackjack is BlackjackInterface {
         // 0 represents a win for the player
         if (win_lose_or_tie == 0 ){  
             
-            (bool sent,bytes memory data) = payable(msg.sender).call{value : 2*bet}(""); 
+            (bool sent, ) = payable(msg.sender).call{value : 2*bet}(""); // Avoiding warnings
             require(sent, "Transfer failed.");// If sent is false, reports that the transfer has failed        
         }
         // 2 represents a tie for the player
         else if ( win_lose_or_tie ==  2 ){
 
-            (bool sent, bytes memory data) = payable(msg.sender).call{value : bet}("");
+            (bool sent, ) = payable(msg.sender).call{value : bet}("");
             require(sent, "Transfer failed.");
         }    
 
