@@ -6,6 +6,7 @@ import "contracts/blackjack_interface.sol";
 
 
 contract Blackjack is BlackjackInterface { 
+    //testing commit from main machine
     uint256 someNumber = 7;//used in the random number generation process.
     bool gameStarted = false; //for the start game function
     bool isHit; //for player and dealer choice. false for stand, true for hit
