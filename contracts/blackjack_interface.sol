@@ -19,13 +19,13 @@ interface BlackjackInterface {
     Else call BlackJackOrBust
     If action == stand call dealerAction()
     */
-    function playerAction(string memory action) external;
+    function playerAction(bool hit) external;
 
     /*
     If dealerHandSum >= 17 call decideWinner()
     Else deal 1 card and add it to the value of dealerHand
     */
-    function dealerAction() external;
+
 
     /*
     Checks player's hand FIRST to see if handValue == 21 || handValue > 21   
@@ -41,16 +41,16 @@ interface BlackjackInterface {
     Edge case: both players hands are equal. In that case refund the bet amount. Set winner variable = tie.
     Call endGame()
     */
-    function decideWinner() external  ;
+    //function decideWinner() internal  ;
 
     /*
     Provide payout to winner. If the winner is player its 1.5*bet amount. 
     If its the dealer the contract get the bet amount from the player if that already hasnt been done in start game.
     Also if its a tie refund the bet amount to the player if they already paid at start of game.
     */
-    function endGame() external;
+    //function endGame() internal;
 
-    function calculateHandValue() external   view returns(uint); // function to calculate hand value
+    //function calculateHandValue(uint[] memory hand) internal   view returns(uint); // function to calculate hand value
 
     event handValueUpdated(address indexed player, uint handValue); // log value of hand 
 
