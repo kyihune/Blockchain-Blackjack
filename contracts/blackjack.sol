@@ -102,9 +102,9 @@ contract Blackjack is BlackjackInterface {
     If dealerHandValue == 21 dealer win
     Call endgame()
     */
-    function blackjackOrBust(uint handSum, string memory playerType) external {
+//    function blackjackOrBust(uint handSum, string memory playerType) external {
         
-    }
+  //  }
 
     /*
     Prematurely ends the game in 2 cases:
@@ -112,7 +112,7 @@ contract Blackjack is BlackjackInterface {
     2. the player or dealer busts.
     Only gets called during player or dealer action when the hand sum calculation is >=21 
     takes in the handSum(uint), and the type of player who the sum belongs to(player or dealer boolean)
-    
+    */
     function blackjackOrBust(uint handSum, bool playerType) internal {
         if((handSum == 21 && playerType == true) || (handSum > 21 && playerType == false))
         {
@@ -125,7 +125,6 @@ contract Blackjack is BlackjackInterface {
         //i believe the correct function to call would be endGame but we'll have to make sure on that. for now its commented out.
         //endGame()
     }
-    */
 
     
     /*
@@ -172,6 +171,19 @@ contract Blackjack is BlackjackInterface {
     Also if its a tie refund the bet amount to the player if they already paid at start of game.
     */
     function endGame() external {
+
+        // 0 represents a win for the player
+        if (win_lose_or_tie == 0 ){  
+            
+            (bool sent, bytes memory data) = payable(msg.sender).call{value : 2*bet}(""); 
+            require(sent, "Transfer failed.") // If sent is false, reports that the transfer has failed        
+        }
+        // 2 represents a tie for the player
+        else if ( win_lose_or_tie ==  2 ){
+
+            (bool sent, bytes memory data) = payable(msg.sender).call{value : bet}("");
+            require(sent, "Transfer failed.")
+        }    
 
     }
 
