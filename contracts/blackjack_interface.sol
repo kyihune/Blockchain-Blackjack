@@ -34,7 +34,7 @@ interface BlackjackInterface {
     If dealerHandValue == 21 Dealer win
     Call endgame()
     */
-    function blackjackOrBust(uint handsum, string memory playerType) external;
+   // function blackjackOrBust(uint handsum, string memory playerType) external;
 
     /*
     Compare dealerhandsum and playerhandsum. Whichever is higher wins. Set the winner variable = winner.

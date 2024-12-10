@@ -102,9 +102,9 @@ contract Blackjack is BlackjackInterface {
     If dealerHandValue == 21 dealer win
     Call endgame()
     */
-    function blackjackOrBust(uint handSum, string memory playerType) external {
+//    function blackjackOrBust(uint handSum, string memory playerType) external {
         
-    }
+  //  }
 
     /*
     Prematurely ends the game in 2 cases:
@@ -112,7 +112,7 @@ contract Blackjack is BlackjackInterface {
     2. the player or dealer busts.
     Only gets called during player or dealer action when the hand sum calculation is >=21 
     takes in the handSum(uint), and the type of player who the sum belongs to(player or dealer boolean)
-    
+    */
     function blackjackOrBust(uint handSum, bool playerType) internal {
         if((handSum == 21 && playerType == true) || (handSum > 21 && playerType == false))
         {
@@ -125,7 +125,6 @@ contract Blackjack is BlackjackInterface {
         //i believe the correct function to call would be endGame but we'll have to make sure on that. for now its commented out.
         //endGame()
     }
-    */
 
     
     /*
