@@ -7,68 +7,29 @@
 		"abi": [
 			{
 				"anonymous": false,
-				"inputs": [],
+				"inputs": [
+					{
+						"indexed": true,
+						"internalType": "address",
+						"name": "player",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "handValue",
+						"type": "uint256"
+					}
+				],
 				"name": "handValueUpdated",
 				"type": "event"
 			},
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "handSum",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "playerType",
-						"type": "string"
-					}
-				],
-				"name": "blackjackOrBust",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "calculateHandValue",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "dealerAction",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "decideWinner",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "endGame",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "action",
-						"type": "string"
+						"internalType": "bool",
+						"name": "hit",
+						"type": "bool"
 					}
 				],
 				"name": "playerAction",
@@ -137,19 +98,19 @@
 	},
 	"sources": {
 		"contracts/blackjack.sol": {
-			"keccak256": "0xb1eeb494b775c346e20fdeb407d2d6fdb5d764f6b6b68a5b594fffec5a6f4a58",
+			"keccak256": "0xafc1f269494b6061e64c4b1c3e37521ee52e51992bae87ba64ce4e8fdbbfb0af",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://61d266953a93b48ecd795bd4bfcfc793b3a0e897ca6d05ae10880d4c9f1206e4",
-				"dweb:/ipfs/QmRb5covM6iyQVGJKwC1F8sf3dwiyG1jbfCTSyVxqrUjy5"
+				"bzz-raw://99ab04fa28e901c72cd76029fa0ee946f7d551a78cd4b95c6f5c38e2b38dfb0d",
+				"dweb:/ipfs/QmZN2UWiSAbqScpUH5pFewZbJGs2VKMJFm9GrT6YZRwgQ2"
 			]
 		},
 		"contracts/blackjack_interface.sol": {
-			"keccak256": "0x434c1491deb611cf8951b40d047aff568ff4d4a6f4de260a5596078e5962ffb5",
+			"keccak256": "0x53037bcd6152e07c1cafa5d0760f9bcfe29db2c6c8a9df6a742a0c46d4641653",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://e8959911620d12f23f8bff6baa44e04957892308c6c698f8e21884eb1583a248",
-				"dweb:/ipfs/QmRhK6LL7SD9FJsBaWEzShbfBWwJXtuNqJmLhF4KyhW9Fi"
+				"bzz-raw://6a5ed64e261c455fab1db56f49434101d66567f9ac096a31490aec1fff07189d",
+				"dweb:/ipfs/QmceyArBc8LbYxtkqJEhPhwkiAAEZMijy3r24XNr3WWqSe"
 			]
 		}
 	},

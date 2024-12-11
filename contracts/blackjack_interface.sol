@@ -9,10 +9,12 @@ interface BlackjackInterface {
     }
 
     /*
-        Check if requirements are met before playing
-        Take money out of playerBalance and store it into a variable and oficially starting the game
-        Add two cards into both the player's and dealer's hand with deal() function
-        Log the values
+
+    Check if requirements are met before playing
+    Take money out of playerBalance and store it into a variable and oficially starting the game
+    Add two cards into both the player's and dealer's hand with deal() function
+    Log the values
+
     */
     function startGame(uint betAmount) external;
 
@@ -48,13 +50,5 @@ interface BlackjackInterface {
     event handValueUpdated(address indexed player, uint handValue); // log value of hand
 
 }
-
-
-
-
-
-
-
-
 
 

@@ -5,16 +5,20 @@ pragma solidity ^0.8.26;
 import "contracts/blackjack_interface.sol";
 
 
+
 contract Blackjack is BlackjackInterface {
     uint256 someNumber = 7;//used in the random number generation process. A code snippet online had it set to 0 but it can be anything.
+
     bool gameStarted = false; //for the start game function
     uint bet = 0; //bet amount
+
     uint win_lose_or_tie;// 0 is win for the player, 1 is lose for the player, 2 is tie.
     //these 2 values are used for testing. going to leave these and certain related lines of code in other functions uncommented.
     uint testPlayerHandValue;
     uint testDealerHandValue;
     //uncomment the variable below for testing.
     uint testcard = 0;
+
 
 
 /*
@@ -100,7 +104,7 @@ contract Blackjack is BlackjackInterface {
 
     /*
     Check if requirements are met before playing
-    Take money out of playerBalance and store it into a variable and oficially starting the game
+    Take money out of playerBalance and store it into a variable and officially starting the game
     Add two cards into both the player's and dealer's hand with deal() function
     Log the values
     */
@@ -130,22 +134,29 @@ contract Blackjack is BlackjackInterface {
     }
 
     /*
-    If action inputed == hit deal one card and add that to the value of the player hand
-    If playerHand < 21 call dealerAction()
-    Else call blackJackOrBust
-    If action == stand call dealerAction()
+
+
+    If action inputed == hit deal one card and add that to the value of the player hand; log the value again 
+    Then you check either if you hit or if you stood if the value is >= 21. If it is >= 21 you go straight into the blackjackOrBust function otherwise you let the dealer take his turn
+    Dealer will only hit if card value is less than 17; if he has a value of 17 or greater he will use the hand to decide the win
+    If he needs to hit then you push in a card and you check if it still less than 21 which he will then use the hand for
+    If it is not < 21 which means > 21 or 21 then you must calculate blackjackorbust
+
     */
     function playerAction(bool hit) external {
 
         if(hit) { // if you hit you push and the value gets automatically updated
-            playerHands[msg.sender].hand.push(deal()); // not going to decide win
+            playerHands[msg.sender].hand.push(deal()); 
             emit handValueUpdated(msg.sender, calculateHandValue(playerHands[msg.sender].hand)); // log value of the players new hand value again
         }
+
 
         //whether the player hits or stands this new line stores the value of their hand for a test we made.
         testPlayerHandValue = calculateHandValue(playerHands[msg.sender].hand); //new line added for testing
 
         if (calculateHandValue(playerHands[msg.sender].hand) >= 21) { // then you check either if you hit or if you stood if the value is >= 21 to go into the blackjackOrBust function
+
+       
                 blackjackOrBust(calculateHandValue(playerHands[msg.sender].hand), true);
         }
 
@@ -174,6 +185,7 @@ contract Blackjack is BlackjackInterface {
     2. the player or dealer busts.
     Only gets called during player or dealer action when the hand sum calculation is >=21
     takes in the handSum(uint), and the type of player who the sum belongs to(player or dealer boolean)
+    calls endGame at the end
     */
     function blackjackOrBust(uint handSum, bool playerType) internal {
         if((handSum == 21 && playerType == true) || (handSum > 21 && playerType == false))
@@ -184,10 +196,12 @@ contract Blackjack is BlackjackInterface {
         {
             win_lose_or_tie = 1; //dealer gets blackjack or player busts
         }
+
         /*I commented this out because playerAction goes through the whole loop. resulting in
            multiple calls to endGame()
         */
         //endGame()
+
     }
 
 
@@ -223,29 +237,35 @@ contract Blackjack is BlackjackInterface {
     }
 
     /*
-    Provide payout to winner. If the winner is player its 1.5*bet amount.
+
+    Provide payout to winner. If the winner is player its 2*bet amount. 
+
     If its the dealer the contract get the bet amount from the player if that already hasnt been done in start game.
-    Also if its a tie refund the bet amount to the player if they already paid at start of game.
+    Also if its a tie refund the bet amount to the player 
     */
     function endGame() internal   {
 
         // 0 represents a win for the player
-        if (win_lose_or_tie == 0 ){
+
+        if (win_lose_or_tie == 0 ){  
 
             (bool sent, ) = payable(msg.sender).call{value : 2*bet}(""); // Avoiding warnings
             require(sent, "Transfer failed.");// If sent is false, reports that the transfer has failed
         }
-        // 2 represents a tie for the player
-        else if ( win_lose_or_tie ==  2 ){
-
-            (bool sent, ) = payable(msg.sender).call{value : bet}("");
-            require(sent, "Transfer failed.");
+        else if (win_lose_or_tie == 1) {
+            playerBalances[msg.sender] -= bet;
         }
+        // 2 represents a tie for the player
 
+        else if ( win_lose_or_tie == 2){
+            playerBalances[msg.sender] +=bet;
+        }    
+        gameStarted = false;
     }
 
     //Calculates the value of the hand of player or dealer
-    function calculateHandValue(uint[] memory hand)  internal pure    returns(uint) { // function to calculate hand value; might need to make a random number generator 1-10
+    function calculateHandValue(uint[] memory hand)  internal pure    returns(uint) { // function to calculate hand value; might need to make a random number generator 1-10 
+
         uint total = 0;
         for(uint i = 0; i < hand.length; i++) {
             total += hand[i];
