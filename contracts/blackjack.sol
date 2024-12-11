@@ -14,10 +14,17 @@ contract Blackjack is BlackjackInterface {
     uint testPlayerHandValue;
     uint testDealerHandValue;
     //uncomment the variable below for testing.
-    //uint testcard = 0;
+    uint testcard = 0;
+
 
 /*
- uncomment these functions if you want to run the tests.
+   uncomment these functions if you want to run the tests.
+   Don't really understand this but apparently its needed. tests were working fine without it for betAmount.
+*/
+
+/*
+    receive() external payable {}
+
     function viewGameStarted() external view returns (bool) {
         return gameStarted;
     }

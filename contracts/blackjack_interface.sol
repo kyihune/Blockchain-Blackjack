@@ -30,6 +30,7 @@ interface BlackjackInterface {
     function deposit() external payable;
 
     //uncomment the following if you want to run tests.
+
 /*
     function viewGameStarted() external view returns (bool);
     function testGameWinner(uint handValue, bool playerType) external;
@@ -41,7 +42,9 @@ interface BlackjackInterface {
     function viewPlayerBalance() external view returns (uint);
     function viewContractBalance() external view returns (uint);
     function testDealCard() external;
+    receive() external payable;
 */
+
     event handValueUpdated(address indexed player, uint handValue); // log value of hand
 
 }
@@ -55,7 +58,3 @@ interface BlackjackInterface {
 
 
 
-
-
-
-}
