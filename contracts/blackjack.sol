@@ -23,7 +23,7 @@ contract Blackjack is BlackjackInterface {
 
 /*
    uncomment these functions if you want to run the tests.
-   Don't really understand this but apparently its needed. tests were working fine without it for betAmount.
+   Don't really understand the recieve but apparently its needed. tests were working fine without it for betAmount.
 */
 
 /*
@@ -109,8 +109,8 @@ contract Blackjack is BlackjackInterface {
     Log the values
     */
     function startGame(uint betAmount) external {
-        // Ensure the player places a vaild bid
-        require(betAmount > 0, "Invalid Bet. Please bid over 0.");
+        // Ensure the player places a vaild bet
+        require(betAmount > 0, "Invalid Bet. Please bet over 0.");
 
         // Ensure the player has enough balance to start the game
         require(playerBalances[msg.sender] >= betAmount, "Insufficient balance to start the game.");
